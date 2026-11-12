@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Gracias por todo, Valentina! | BULL MARKETING</title>
+    <!-- Tailwind CSS para diseño responsivo y utilidades -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        bull: {
+                            orange: '#EE5A29',
+                            orangeDark: '#D44617',
+                            dark: '#161618',
+                        },
+                        lulo: {
+                            deep: '#132A9C',
+                            cyan: '#00A8F3',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Animaciones personalizadas suaves */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes floatSlow {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-8px) rotate(2deg);
+            }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% {
+                box-shadow: 0 10px 30px -5px rgba(238, 90, 41, 0.35);
+            }
+            50% {
+                box-shadow: 0 15px 40px -2px rgba(238, 90, 41, 0.55);
+            }
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+
+        .float-badge {
+            animation: floatSlow 5s ease-in-out infinite;
+        }
+
+        .btn-celebrate {
+            animation: pulseGlow 3s infinite;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .btn-celebrate:hover {
+            transform: translateY(-3px) scale(1.02);
+        }
+
+        .btn-celebrate:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        /* Fondo decorativo sutil con malla de colores de marca */
+        .bg-brand-mesh {
+            background-color: #FAFAFC;
+            background-image: 
+                radial-gradient(at 8% 12%, rgba(238, 90, 41, 0.11) 0px, transparent 48%),
+                radial-gradient(at 92% 15%, rgba(0, 168, 243, 0.10) 0px, transparent 45%),
+                radial-gradient(at 85% 88%, rgba(19, 42, 156, 0.08) 0px, transparent 50%),
+                radial-gradient(at 15% 85%, rgba(238, 90, 41, 0.07) 0px, transparent 45%);
+        }
+
+        /* Canvas de confeti superpuesto sin bloquear clics */
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 50;
+        }
+    </style>
+</head>
+<body class="bg-brand-mesh min-h-screen text-bull-dark antialiased selection:bg-bull-orange selection:text-white flex flex-col justify-between relative overflow-x-hidden">
+
+    <!-- Canvas para lluvia de confeti -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- Barra superior decorativa con degradado BULL -> LULO -->
+    <div class="w-full h-2 bg-gradient-to-r from-[#EE5A29] via-[#FF7A45] to-[#00A8F3]"></div>
+
+    <!-- Contenedor Principal -->
+    <main class="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14 flex-grow flex flex-col items-center justify-center">
+        
+        <!-- Cabecera con el Logo Oficial Recreación SVG de BULL MARKETING -->
+        <header class="w-full flex flex-col items-center mb-8 sm:mb-10 opacity-0 animate-fade-in-up">
+            <div class="bg-white/90 backdrop-blur-md px-7 py-5 rounded-3xl shadow-sm border border-gray-100/80 transition-transform duration-300 hover:scale-105">
+                <!-- Logo SVG BULL MARKETING -->
+                <svg class="w-52 sm:w-64 h-auto mx-auto" viewBox="0 0 360 125" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Logo BULL MARKETING">
+                    <!-- Letra B en Naranja #EE5A29 -->
+                    <path d="M18 14H56C72.5 14 82 22.2 82 35.2C82 43.8 77.2 49.8 69.8 52.4C79.2 55 85 62.2 85 72.5C85 87.2 73.8 96 55.5 96H18V14Z" fill="#EE5A29"/>
+                    
+                    <!-- Silueta blanca del toro integrada dentro de la letra B -->
+                    <path d="M16 49C23 41 32 37 42 40C48 41.8 53 46.5 60 48.2C66.5 49.8 73 48.5 79 45.5" stroke="#FFFFFF" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M44 56C43 65 45.5 74 50.5 80.5C53.5 84.2 57.5 84 60 79.8C63.5 73.8 64.5 65.5 62.5 57.5" stroke="#FFFFFF" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/>
+
+                    <!-- Letra U -->
+                    <path d="M97 14H120V63.5C120 73.2 125.2 78.2 133.5 78.2C141.8 78.2 147 73.2 147 63.5V14H170V64.5C170 85.8 156.2 97.5 133.5 97.5C110.8 97.5 97 85.8 97 64.5V14Z" fill="#EE5A29"/>
+
+                    <!-- Primera Letra L -->
+                    <path d="M185 14H208V77.5H244V96H185V14Z" fill="#EE5A29"/>
+
+                    <!-- Segunda Letra L -->
+                    <path d="M254 14H277V77.5H313V96H254V14Z" fill="#EE5A29"/>
+
+                    <!-- Subtítulo MARKETING en negro con tracking amplio -->
+                    <text x="166" y="117" text-anchor="middle" fill="#161618" font-family="'Plus Jakarta Sans', 'Inter', sans-serif" font-weight="800" font-size="16.5" letter-spacing="11.2">MARKETING</text>
+                </svg>
+            </div>
+        </header>
+
+        <!-- Tarjeta Principal de Homenaje -->
+        <article class="w-full bg-white rounded-[2rem] shadow-xl shadow-gray-200/70 border border-gray-100 overflow-hidden opacity-0 animate-fade-in-up delay-100">
+            
+            <!-- Banner superior interno de la tarjeta -->
+            <div class="relative bg-gradient-to-br from-[#161618] via-[#1E2028] to-[#132A9C] px-6 sm:px-12 py-10 sm:py-12 text-center text-white overflow-hidden">
+                <!-- Círculos de luz decorativos -->
+                <div class="absolute -top-16 -left-16 w-56 h-56 rounded-full bg-[#EE5A29]/25 blur-2xl pointer-events-none"></div>
+                <div class="absolute -bottom-20 -right-12 w-64 h-64 rounded-full bg-[#00A8F3]/25 blur-2xl pointer-events-none"></div>
+
+                <!-- Etiqueta superior -->
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/15 text-xs sm:text-sm font-medium tracking-wide text-orange-200 mb-5">
+                    <span class="w-2 h-2 rounded-full bg-[#EE5A29] animate-ping"></span>
+                    <span>HASTA PRONTO, VALENTINA</span>
+                </div>
+
+                <!-- Título Principal -->
+                <h1 class="font-display text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight mb-4">
+                    ¡Gracias por todo, <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#FF7A45] via-[#EE5A29] to-[#FFB088]">Valentina!</span>
+                </h1>
+
+                <!-- Subtítulo -->
+                <p class="text-base sm:text-xl text-gray-200 font-light max-w-2xl mx-auto leading-relaxed">
+                    Tu huella en <strong class="font-semibold text-white">BULL MARKETING</strong> siempre quedará con nosotros.
+                </p>
+            </div>
+
+            <!-- Cuerpo del Mensaje -->
+            <div class="px-6 sm:px-12 py-8 sm:py-11">
+                
+                <!-- Carta emotiva de Jhon y Brando -->
+                <div class="relative bg-gradient-to-b from-orange-50/50 to-blue-50/30 rounded-2xl p-6 sm:p-9 border border-orange-100/70 mb-8 opacity-0 animate-fade-in-up delay-200">
+                    <!-- Comillas decorativas -->
+                    <svg class="w-10 h-10 text-[#EE5A29]/20 mb-3" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                    </svg>
+
+                    <div class="space-y-4 text-gray-700 text-base sm:text-lg leading-relaxed font-normal">
+                        <p>
+                            Querida <span class="font-semibold text-bull-dark">Vale</span>,
+                        </p>
+                        <p>
+                            Hoy queremos hacer una pausa para agradecerte de corazón por todo el tiempo, la entrega y la buena vibra que compartiste con nosotros en <span class="font-semibold text-[#EE5A29]">Bull Marketing</span>. Trabajar a tu lado no solo hizo que cada proyecto fluyera mejor, sino que convirtió los días de correcciones, entregas y correrías en momentos llenos de compañerismo y risas.
+                        </p>
+                        <p>
+                            Nos quedamos con tu talento, tu disposición siempre amable para sumar en equipo y esa energía bonita que contagia a todos alrededor. Gracias por cada idea, por tu paciencia y por ser una gran compañera en cada reto que asumimos juntos.
+                        </p>
+                        <p class="font-medium text-bull-dark">
+                            Sabemos que donde vayas vas a brillar muchísimo. Te deseamos los mayores éxitos, aprendizajes increíbles y toda la felicidad en esta nueva etapa que comienzas. ¡Aquí siempre tendrás dos amigos y un equipo que te admira!
+                        </p>
+                    </div>
+
+                    <!-- Firma de Jhon y Brandon -->
+                    <div class="mt-8 pt-6 border-t border-gray-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                        <div>
+                            <p class="text-xs uppercase tracking-widest text-gray-400 font-semibold mb-1">Con mucho cariño y admiración,</p>
+                            <p class="font-display text-xl sm:text-2xl font-bold text-bull-dark">
+                                Tus compañeritos <span class="text-[#EE5A29]">Jhon</span> & <span class="text-[#132A9C]">Brandon</span> 🧡💙
+                            </p>
+                        </div>
+
+                        <!-- Guiño al segundo logo (Isotipo geométrico sobre degradado azul a cian) -->
+                        <div class="flex items-center gap-3 self-start sm:self-center bg-white px-3.5 py-2 rounded-2xl shadow-sm border border-gray-100 float-badge" title="Recuerdos de equipo y proyectos compartidos">
+                            <div class="w-11 h-11 rounded-xl bg-gradient-to-b from-[#132A9C] to-[#00A8F3] flex items-center justify-center shadow-inner shrink-0">
+                                <!-- Recreación SVG limpia del isotipo blanco -->
+                                <svg class="w-7 h-7" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Isotipo equipo">
+                                    <!-- Arco principal izquierdo y barra base -->
+                                    <path d="M38 44V64H20V47C20 31.5 32.5 19 48 19C63.5 19 76 31.5 76 47V64H45" stroke="#FFFFFF" stroke-width="7.5" stroke-linecap="square"/>
+                                    <!-- Cuadrado superior izquierdo -->
+                                    <rect x="34.2" y="31" width="7.5" height="7.5" fill="#FFFFFF"/>
+                                    <!-- Bucle central inferior -->
+                                    <path d="M46 54C46 47.5 51 43 57 43C63 43 68 47.5 68 54V66C68 74.5 61 81 52.5 81C44.5 81 38 75 37.2 67.5" stroke="#FFFFFF" stroke-width="7.5" stroke-linecap="square"/>
+                                    <!-- Trazo derecho en U -->
+                                    <path d="M84 43V62C84 68.5 88.5 73 94.5 73C100.5 73 105 68.5 105 62V43" transform="translate(-14, -4) scale(0.92)" stroke="#FFFFFF" stroke-width="7.8" stroke-linecap="square"/>
+                                    <rect x="75" y="31" width="7" height="7" transform="skewX(-12)" fill="#FFFFFF"/>
+                                </svg>
+                            </div>
+                            <div class="text-left">
+                                <span class="block text-[11px] font-bold uppercase tracking-wider text-[#132A9C]">Equipo & Proyectos</span>
+                                <span class="block text-xs text-gray-500">Momentos inolvidables</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Insignias de cualidades de Valentina -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-9 opacity-0 animate-fade-in-up delay-300">
+                    <!-- Card 1 -->
+                    <div class="group bg-gray-50 hover:bg-white p-5 rounded-2xl border border-gray-100 hover:border-orange-200 hover:shadow-md transition-all duration-300">
+                        <div class="w-10 h-10 rounded-xl bg-orange-100 text-[#EE5A29] flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-display font-bold text-gray-900 text-base mb-1">Energía contagiosa</h3>
+                        <p class="text-sm text-gray-600 leading-snug">Siempre con la mejor actitud para alegrar los días de trabajo.</p>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="group bg-gray-50 hover:bg-white p-5 rounded-2xl border border-gray-100 hover:border-blue-200 hover:shadow-md transition-all duration-300">
+                        <div class="w-10 h-10 rounded-xl bg-blue-100 text-[#132A9C] flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-display font-bold text-gray-900 text-base mb-1">Talento y dedicación</h3>
+                        <p class="text-sm text-gray-600 leading-snug">Dejando siempre un sello de calidad y compromiso en cada detalle.</p>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="group bg-gray-50 hover:bg-white p-5 rounded-2xl border border-gray-100 hover:border-cyan-200 hover:shadow-md transition-all duration-300">
+                        <div class="w-10 h-10 rounded-xl bg-cyan-100 text-[#00A8F3] flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                            </svg>
+                        </div>
+                        <h3 class="font-display font-bold text-gray-900 text-base mb-1">Gran compañera</h3>
+                        <p class="text-sm text-gray-600 leading-snug">Apoyo incondicional, empatía y risas que nunca faltaron.</p>
+                    </div>
+                </div>
+
+                <!-- Botón Interactivo de Celebración -->
+                <div class="flex flex-col items-center justify-center text-center opacity-0 animate-fade-in-up delay-400">
+                    <button id="celebrateBtn" type="button" class="btn-celebrate cursor-pointer inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-[#EE5A29] to-[#FF6E3D] hover:from-[#D44617] hover:to-[#EE5A29] text-white font-display font-bold text-base sm:text-lg shadow-lg">
+                        <span>¡Enviar un abrazo de equipo!</span>
+                        <span class="text-xl" aria-hidden="true">🎉</span>
+                    </button>
+                    <p class="text-xs text-gray-400 mt-3">Haz clic para celebrar a Valentina ✨</p>
+                </div>
+
+            </div>
+        </article>
+    </main>
+
+    <!-- Mensaje flotante especial (Toast) al presionar el botón -->
+    <div id="toastMessage" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-md bg-bull-dark text-white px-6 py-4 rounded-2xl shadow-2xl border border-white/15 flex items-center gap-4 transition-all duration-500 opacity-0 translate-y-10 pointer-events-none">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-[#EE5A29] to-[#00A8F3] flex items-center justify-center text-xl shrink-0 shadow-md">
+            🤗
+        </div>
+        <div class="flex-1">
+            <p class="font-display font-bold text-sm sm:text-base text-white">¡Abrazo enviado con éxito!</p>
+            <p id="toastSubtext" class="text-xs sm:text-sm text-gray-300 mt-0.5">Jhon y Brandon te desean lo mejor del mundo, Vale. ¡Éxitos totales!</p>
+        </div>
+    </div>
+
+    <!-- Pie de página -->
+    <footer class="w-full py-6 text-center text-xs sm:text-sm text-gray-500">
+        <p>Hecho con mucho cariño por <span class="font-semibold text-gray-700">Jhon y Brandon</span> • Familia <span class="font-bold text-[#EE5A29]">BULL MARKETING</span></p>
+    </footer>
+
+    <!-- Lógica de Confeti y Micro-interacciones en JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('confetti-canvas');
+            const ctx = canvas.getContext('2d');
+            const celebrateBtn = document.getElementById('celebrateBtn');
+            const toastMessage = document.getElementById('toastMessage');
+            const toastSubtext = document.getElementById('toastSubtext');
+
+            let width = canvas.width = window.innerWidth;
+            let height = canvas.height = window.innerHeight;
+            let particles = [];
+            let animationFrameId = null;
+            let toastTimeout = null;
+
+            // Frases aleatorias especiales de Jhon y Brandon al hacer clic
+            const specialMessages = [
+                "¡Jhon y Brandon te mandan un abrazo gigante, Vale! ¡Gracias por tantas risas!",
+                "¡Muchos éxitos en tu nuevo camino, Valentina! Bull siempre será tu casa.",
+                "¡Eres crack, Vale! Gracias por cada momento compartido en equipo.",
+                "¡A romperla en esta nueva etapa! Con cariño, tus compañeritos Jhon y Brandon."
+            ];
+            let msgIndex = 0;
+
+            // Paleta de colores inspirada en BULL MARKETING y el logo azul/cian
+            const brandColors = [
+                '#EE5A29', // Naranja Bull
+                '#FF7A45', // Naranja claro
+                '#132A9C', // Azul profundo
+                '#00A8F3', // Cian vibrante
+                '#FFD166', // Dorado celebración
+                '#161618'  // Negro corporativo
+            ];
+
+            // Ajustar tamaño del canvas al redimensionar pantalla
+            window.addEventListener('resize', () => {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            });
+
+            // Clase para cada partícula de confeti
+            class ConfettiParticle {
+                constructor(originX, originY) {
+                    this.x = originX;
+                    this.y = originY;
+                    this.size = Math.random() * 9 + 5;
+                    this.color = brandColors[Math.floor(Math.random() * brandColors.length)];
+                    
+                    // Velocidad explosiva inicial hacia arriba y los lados
+                    const angle = Math.random() * Math.PI * 2;
+                    const velocity = Math.random() * 14 + 6;
+                    this.vx = Math.cos(angle) * velocity;
+                    this.vy = Math.sin(angle) * velocity - 6;
+                    
+                    this.gravity = 0.28;
+                    this.drag = 0.96;
+                    this.rotation = Math.random() * 360;
+                    this.rotationSpeed = (Math.random() - 0.5) * 12;
+                    this.shape = Math.random() > 0.35 ? 'rect' : 'circle';
+                    this.opacity = 1;
+                }
+
+                update() {
+                    this.vx *= this.drag;
+                    this.vy *= this.drag;
+                    this.vy += this.gravity;
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    this.rotation += this.rotationSpeed;
+
+                    if (this.y > height - 60) {
+                        this.opacity -= 0.025;
+                    }
+                }
+
+                draw() {
+                    ctx.save();
+                    ctx.globalAlpha = Math.max(0, this.opacity);
+                    ctx.translate(this.x, this.y);
+                    ctx.rotate((this.rotation * Math.PI) / 180);
+                    ctx.fillStyle = this.color;
+
+                    if (this.shape === 'rect') {
+                        ctx.fillRect(-this.size / 2, -this.size / 4, this.size, this.size / 1.8);
+                    } else {
+                        ctx.beginPath();
+                        ctx.arc(0, 0, this.size / 2.2, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                    ctx.restore();
+                }
+            }
+
+            function launchConfetti(x, y, count = 110) {
+                for (let i = 0; i < count; i++) {
+                    particles.push(new ConfettiParticle(x, y));
+                }
+                if (!animationFrameId) {
+                    animateConfetti();
+                }
+            }
+
+            function animateConfetti() {
+                ctx.clearRect(0, 0, width, height);
+
+                for (let i = particles.length - 1; i >= 0; i--) {
+                    const p = particles[i];
+                    p.update();
+                    p.draw();
+
+                    if (p.opacity <= 0 || p.y > height + 30) {
+                        particles.splice(i, 1);
+                    }
+                }
+
+                if (particles.length > 0) {
+                    animationFrameId = requestAnimationFrame(animateConfetti);
+                } else {
+                    animationFrameId = null;
+                    ctx.clearRect(0, 0, width, height);
+                }
+            }
+
+            function showToast() {
+                toastSubtext.textContent = specialMessages[msgIndex % specialMessages.length];
+                msgIndex++;
+
+                toastMessage.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
+                toastMessage.classList.add('opacity-100', 'translate-y-0');
+
+                if (toastTimeout) clearTimeout(toastTimeout);
+                toastTimeout = setTimeout(() => {
+                    toastMessage.classList.remove('opacity-100', 'translate-y-0');
+                    toastMessage.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none');
+                }, 4800);
+            }
+
+            // Evento al hacer clic o tocar el botón de abrazo
+            celebrateBtn.addEventListener('click', (e) => {
+                const rect = celebrateBtn.getBoundingClientRect();
+                const originX = rect.left + rect.width / 2;
+                const originY = rect.top + rect.height / 2;
+
+                launchConfetti(originX, originY, 130);
+                showToast();
+            });
+
+            // Lanzar una pequeña bienvenida de confeti suave al cargar la página
+            setTimeout(() => {
+                launchConfetti(width / 2, height * 0.32, 65);
+            }, 600);
+        });
+    </script>
+</body>
+</html>
